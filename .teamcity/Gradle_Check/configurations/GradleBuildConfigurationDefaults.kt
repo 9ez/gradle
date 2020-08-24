@@ -29,9 +29,12 @@ val killAllGradleProcessesLinux = """
     ps aux | egrep 'Gradle(Daemon|Worker)' | awk '{print ${'$'}2}'
 """.trimIndent()
 
-// TODO: Do some actual killing here
 val killAllGradleProcessesWindows = """
-    WMIC PROCESS GET processid,commandline
+    wmic OS get FreePhysicalMemory,FreeVirtualMemory,FreeSpaceInPagingFiles /VALUE
+    wmic Path win32_process Where "name='java.exe' AND (CommandLine Like '%GradleDaemon%' OR CommandLine Like 'GradleWorker')"
+    wmic Path win32_process Where "name='java.exe' AND (CommandLine Like '%GradleDaemon%' OR CommandLine Like 'GradleWorker')" Call Terminate
+    wmic OS get FreePhysicalMemory,FreeVirtualMemory,FreeSpaceInPagingFiles /VALUE
+    wmic Path win32_process Where "name='java.exe' AND (CommandLine Like '%GradleDaemon%' OR CommandLine Like 'GradleWorker')"
 """.trimIndent()
 
 val m2CleanScriptUnixLike = """
