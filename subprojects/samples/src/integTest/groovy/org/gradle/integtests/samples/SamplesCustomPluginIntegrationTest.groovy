@@ -43,7 +43,7 @@ class SamplesCustomPluginIntegrationTest extends AbstractSampleIntegrationTest {
     }
 
     @ToBeFixedForConfigurationCache(
-        iterationMatchers = ".* for javaGradlePlugin producer .*"
+        iterationMatchers = ".* for java-gradle-plugin producer .*"
     )
     @Unroll
     @UsesSample("plugins/customPlugin")
@@ -70,10 +70,10 @@ class SamplesCustomPluginIntegrationTest extends AbstractSampleIntegrationTest {
         outputContains('hello from GreetingTask')
 
         where:
-        producerName       | dsl
-        'plugin'           | 'groovy'
-        'javaGradlePlugin' | 'groovy'
-        'plugin'           | 'kotlin'
-        'javaGradlePlugin' | 'kotlin'
+        producerName         | dsl
+        'plugin'             | 'groovy'
+        'java-gradle-plugin' | 'groovy'
+        'plugin'             | 'kotlin'
+        'java-gradle-plugin' | 'kotlin'
     }
 }
